@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class CreateDataset extends Component {
+class Auth extends Component {
   render () {
     return (
       <div>
-        <p>CreateDataset</p>
+        <p>Auth</p>
       </div>
     )
   }
 }
 
-export default CreateDataset
+export default Auth
