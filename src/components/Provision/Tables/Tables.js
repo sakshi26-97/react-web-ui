@@ -1,10 +1,9 @@
 import React from 'react'
+import Accordion from '../../UI/Accordion/Accordion'
 
 const tables = (props) => {
   return (
-    <div>
-
-    </div>
+    <Accordion />
   )
 }
 

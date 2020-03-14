@@ -1,11 +1,15 @@
+// import classes from './Footer.css'
 import React, { Component } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-import * as actionCreators from './store/actions/index';
 import asyncComponent from './hoc/asyncComponent/asyncComponent'
+import Aux from './hoc/Aux/Aux'
 
-import classes from './App.css';
+import Footer from './components/Navigation/Footer/Footer'
+import Header from './components/Navigation/Header/Header'
+
+import { connect } from 'react-redux';
+import * as provisionActionCreators from './store/actions/index'
 
 
 
@@ -52,26 +56,34 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <Aux>
+        <Header />
         {routes}
-      </div>
+        <Footer />
+      </Aux>
     );
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     // isAuthenticated: state.authReducer.token !== null
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    stepNumber: state.provisonReducer.stepNumber,
+    datasets: state.provisonReducer.datasets,
+    // isAuthenticated: state.authReducer.token !== null
+  }
+}
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     // onTryAutoSignup: () => dispatch(actionCreators.authCheckState())
-//   };
-// };
+const mapDispatchToProps = dispatch => {
+  return {
+    increaseStepper: () => dispatch(provisionActionCreators.increaseStepper(1)),
+  }
+}
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
-export default withRouter(App)
+
+
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+// export default withRouter(App)
 
 

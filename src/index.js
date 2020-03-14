@@ -10,6 +10,11 @@ import { Provider } from 'react-redux';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import authReducer from './store/reducers/auth'
+import provisonReducer from './store/reducers/provision'
+import createReducer from './store/reducers/create'
+import copyReducer from './store/reducers/copy'
+
 /* for async code */
 import thunk from 'redux-thunk';
 
@@ -17,7 +22,10 @@ import thunk from 'redux-thunk';
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
-
+  authReducer: authReducer,
+  provisonReducer: provisonReducer,
+  createReducer: createReducer,
+  copyReducer: copyReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
