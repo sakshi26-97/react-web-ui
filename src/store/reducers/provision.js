@@ -4,6 +4,7 @@ import { updateObject } from '../../utility/utility'
 const initialState = {
   projectId: null,
   datasets: null,
+  tables: null,
   loading: false,
   error: null,
   stepNumber: 1
@@ -47,6 +48,18 @@ const getDatasetFailed = (state, action) => {
   return updateObject(state, { error: action.error, loading: false })
 }
 
+const getTableInit = (state, action) => {
+  return updateObject(state, { loading: true })
+}
+
+const getTableSuccess = (state, action) => {
+  return updateObject(state, { tables: action.tables, loading: false })
+}
+
+const getTableFailed = (state, action) => {
+  return updateObject(state, { error: action.error, loading: false })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
@@ -70,6 +83,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GET_DATASET_SUCCESS: return getDatasetSuccess(state, action)
 
     case actionTypes.GET_DATASET_FAILED: return getDatasetFailed(state, action)
+
+    case actionTypes.GET_TABLE_INIT: return getTableInit(state, action)
+
+    case actionTypes.GET_TABLE_SUCCESS: return getTableSuccess(state, action)
+
+    case actionTypes.GET_TABLE_FAILED: return getTableFailed(state, action)
 
     default: return state
   }

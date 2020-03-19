@@ -1,6 +1,7 @@
 export {
+  increaseStepper,
+  decreaseStepper,
   getProject,
   getDatasets,
-  increaseStepper,
-  decreaseStepper
+  getTables
 } from './provision'
