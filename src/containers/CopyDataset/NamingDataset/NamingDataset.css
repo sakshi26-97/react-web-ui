@@ -1,0 +1,21 @@
+.NamingDataset {
+  width: 40%;
+  margin: auto;
+}
+
+.AccordionFlex {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 1% 10%;
+}
+
+.ButtonFlex {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 3rem;
+}
+
+.Button {
+  height: 2rem;
+  width: 4rem;
+}
