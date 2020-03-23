@@ -5,6 +5,7 @@ const initialState = {
   projectId: null,
   datasets: null,
   tables: null,
+  schemas: null,
   loading: false,
   error: null,
   stepNumber: 1
@@ -60,6 +61,18 @@ const getTableFailed = (state, action) => {
   return updateObject(state, { error: action.error, loading: false })
 }
 
+const getSchemaInit = (state, action) => {
+  return updateObject(state, { loading: true })
+}
+
+const getSchemaSuccess = (state, action) => {
+  return updateObject(state, { schemas: action.schemas, loading: false })
+}
+
+const getSchemaFailed = (state, action) => {
+  return updateObject(state, { error: action.error, loading: false })
+}
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
@@ -89,6 +102,12 @@ const reducer = (state = initialState, action) => {
     case actionTypes.GET_TABLE_SUCCESS: return getTableSuccess(state, action)
 
     case actionTypes.GET_TABLE_FAILED: return getTableFailed(state, action)
+
+    case actionTypes.GET_SCHEMA_INIT: return getSchemaInit(state, action)
+
+    case actionTypes.GET_SCHEMA_SUCCESS: return getSchemaSuccess(state, action)
+
+    case actionTypes.GET_SCHEMA_FAILED: return getSchemaFailed(state, action)
 
     default: return state
   }

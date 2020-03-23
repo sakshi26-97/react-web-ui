@@ -88,9 +88,6 @@ const getDatasetFailed = (errorMessage) => {
 
 /* TABLES */
 export const getTables = (selectedDataset) => {
-  console.log('====================================');
-  console.log(selectedDataset);
-  console.log('====================================');
   return async dispatch => {
     dispatch(getTableInit())
     const response = await axios.post('/tables', {
@@ -114,14 +111,17 @@ const getTableInit = () => {
 
 const getTableSuccess = (tables) => {
 
-  let data = Object.keys(tables).map(table => {
-    return {
-      [table]: tables[table].map(tableName => tableName.tableName)
-    }
-  })
+  // let data = Object.keys(tables).map(table => {
+  //   return {
+  //     [table]: tables[table].map(tableName => tableName.tableName)
+  //   }
+  // })
+  console.log('====================================');
+  console.log(tables, 'tables');
+  console.log('====================================');
   return {
     type: actionTypes.GET_TABLE_SUCCESS,
-    tables: data
+    tables: tables
   }
 }
 
@@ -133,35 +133,47 @@ const getTableFailed = (errorMessage) => {
 }
 
 /* SCHEMAS */
-// export const getSchema = () => {
-//   return async dispatch => {
-//     dispatch(getSchemaInit())
-//     const response = await axios.get('/Schemas')
-//     if (response.data.success) {
-//       dispatch(getDatasets(response.data.data.SchemaId))
-//       return dispatch(getSchemaSuccess(response.data.data.SchemaId))
-//     }
-//     return dispatch(getSchemaFailed(response.data.message))
-//   }
+export const getSchemas = (selectedTables) => {
+  return async dispatch => {
+    dispatch(getSchemaInit())
+    const response = await axios.post('/schemas', {
+      "SchemaRequest": {
+        "data": selectedTables
+      }
+    })
+    if (response.data.success) {
+      return dispatch(getSchemaSuccess(response.data.data.schema))
+    }
+    return dispatch(getSchemaFailed(response.data.message))
+  }
 
-// }
+}
 
-// const getSchemaInit = () => {
-//   return {
-//     type: actionTypes.GET_SCHEMA_INIT
-//   }
-// }
+const getSchemaInit = () => {
+  return {
+    type: actionTypes.GET_SCHEMA_INIT
+  }
+}
 
-// const getSchemaSuccess = (SchemaId) => {
-//   return {
-//     type: actionTypes.GET_SCHEMA_SUCCESS,
-//     SchemaId: SchemaId
-//   }
-// }
+const getSchemaSuccess = (schemas) => {
 
-// const getSchemaFailed = (errorMessage) => {
-//   return {
-//     type: actionTypes.GET_SCHEMA_FAILED,
-//     error: errorMessage
-//   }
-// }
+  // let data = Object.keys(tables).map(table => {
+  //   return {
+  //     [table]: tables[table].map(tableName => tableName.tableName)
+  //   }
+  // })
+  console.log('====================================');
+  console.log(schemas, 'schemas');
+  console.log('====================================');
+  return {
+    type: actionTypes.GET_SCHEMA_SUCCESS,
+    schemas: schemas
+  }
+}
+
+const getSchemaFailed = (errorMessage) => {
+  return {
+    type: actionTypes.GET_SCHEMA_FAILED,
+    error: errorMessage
+  }
+}

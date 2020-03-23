@@ -1,0 +1,15 @@
+.Accordion {
+  width: 50%;
+  margin: 2rem auto;
+}
+
+.ButtonFlex {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 3rem;
+}
+
+.Button {
+  height: 2rem;
+  width: 4rem;
+}

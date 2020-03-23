@@ -8,35 +8,9 @@ import { connect } from 'react-redux';
 import * as provisionActionCreators from '../../../store/actions/index'
 
 class Datasets extends Component {
-  state = {
-    selectedDatasets: []
-  }
 
   componentDidMount () {
     this.props.getProject()
-  }
-
-  isDisable = () => {
-    return this.state.selectedDatasets.length > 0 ? false : true
-  }
-
-  getCheckedItems = (event, dataset) => {
-    let copiedState = {
-      ...this.state,
-      selectedDatasets: [...this.state.selectedDatasets]
-    }
-
-    if (event.target.checked) {
-      this.setState({
-        selectedDatasets: copiedState.selectedDatasets.concat(dataset)
-      })
-    }
-    else {
-      this.setState({
-        selectedDatasets: copiedState.selectedDatasets.filter(item => item !== dataset)
-      })
-
-    }
   }
 
   render () {
@@ -63,7 +37,7 @@ class Datasets extends Component {
                     <tr key={index}>
                       <td>
                         <label className="form-checkbox">
-                          <input type="checkbox" onClick={(event) => this.getCheckedItems(event, dataset)} />
+                          <input type="checkbox" onClick={(event) => this.props.getDatasetCheckedItems(event, dataset)} />
                           <i className="form-icon"></i>{index + 1}
                         </label>
                       </td>
@@ -78,7 +52,7 @@ class Datasets extends Component {
           <Button
             classes={classes.Button}
             clicked={this.props.increaseStepNumber}
-            disabled={this.isDisable()}>Next</Button>
+            disabled={this.props.disabled}>Next</Button>
         </div>
       )
     }

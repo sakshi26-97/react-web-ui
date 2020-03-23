@@ -15,19 +15,53 @@ class ProvisionData extends Component {
 
 
   state = {
-    stepNames: ['Select Datasets', 'Select Tables', 'Select Schemas', 'Filter', 'View', 'Summary']
+    stepNames: ['Select Datasets', 'Select Tables', 'Select Schemas', 'Filter', 'View', 'Summary'],
+    selectedDatasets: []
   }
 
+  isDisable = () => {
+    return this.state.selectedDatasets.length > 0 ? false : true
+  }
+
+  getDatasetCheckedItems = (event, dataset) => {
+    let copiedState = {
+      ...this.state,
+      selectedDatasets: [...this.state.selectedDatasets]
+    }
+
+    if (event.target.checked) {
+      this.setState({
+        selectedDatasets: copiedState.selectedDatasets.concat(dataset)
+      })
+    }
+    else {
+      this.setState({
+        selectedDatasets: copiedState.selectedDatasets.filter(item => item !== dataset)
+      })
+
+    }
+  }
+
+  getTableCheckedItems = () => {
+
+  }
+
+  getAllTableCheckedItems = () => {
+
+  }
 
   componentToBeRender = () => {
     // if (this.props.datasets && this.props.projectId) {
     switch (this.props.stepNumber) {
       case 1: return <Datasets
-        increaseStepNumber={this.props.increaseStepper} />
+        increaseStepNumber={this.props.increaseStepper}
+        getDatasetCheckedItems={this.getDatasetCheckedItems}
+        disabled={this.isDisable()} />
 
       case 2: return <Tables
         increaseStepNumber={this.props.increaseStepper}
-        decreaseStepNumber={this.props.decreaseStepper} />
+        decreaseStepNumber={this.props.decreaseStepper}
+        selectedDatasets={this.state.selectedDatasets} />
 
       case 3: return <Schemas
         increaseStepNumber={this.props.increaseStepper}
