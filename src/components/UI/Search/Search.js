@@ -8,7 +8,7 @@ const search = (props) => {
   return (
     //  <SearchIcon />
     <input type="search" className={classesApplied.join(' ')} name="search" autoComplete="off"
-      placeholder={props.placeholder} />
+      placeholder={props.placeholder} onKeyUp={(event) => props.textValue(event.target.value)} />
   )
 }
 

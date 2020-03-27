@@ -1,3 +1,5 @@
+/* Lazy Loading */
+
 import React, { Component } from 'react'
 
 const asyncComponent = (importComponent) => {

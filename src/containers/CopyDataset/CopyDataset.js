@@ -14,14 +14,21 @@ class CopyDataset extends Component {
     selectedDatasets: [],
   }
 
-  copyDataset = [...this.state.selectedDatasets]
 
+  /* initiliazes selectedDatasets=[] when back or cancel button is clicked */
+  setSelectedDatasetToEmptyArray = () => {
+    this.setState({
+      selectedDatasets: [...[]]
+    })
+  }
+
+  /* checks whether next button in step 1 should be disabled or not */
   isDisable = () => {
     return this.state.selectedDatasets.length > 0 ? false : true
   }
 
 
-
+  /* get all the datasets selected in step 1 in state.selectedDatasets  */
   getDatasetCheckedItems = (event, dataset) => {
     let copiedState = {
       ...this.state,
@@ -35,36 +42,36 @@ class CopyDataset extends Component {
     }
     else {
       this.setState({
-        selectedDatasets: copiedState.selectedDatasets.filter(item => item !== dataset)
+        selectedDatasets: copiedState.selectedDatasets.filter(selectedDataset => selectedDataset !== dataset)
       })
 
     }
   }
 
-
-
+  /* render component based on step number */
   componentToBeRender = () => {
-    if (this.props.stepNumber) {
-      switch (this.props.stepNumber) {
-        case 1: return <SelectDataset
-          increaseStepNumber={this.props.increaseStepper}
-          getDatasetCheckedItems={this.getDatasetCheckedItems}
-          disabled={this.isDisable()} />
+    switch (this.props.stepNumber) {
+      case 1: return <SelectDataset
+        increaseStepNumber={this.props.increaseStepper}
+        getDatasetCheckedItems={this.getDatasetCheckedItems}
+        disabled={this.isDisable()} />
 
-        case 2: return <NamingDataset
-          increaseStepNumber={this.props.increaseStepper}
-          decreaseStepNumber={this.props.decreaseStepper}
-          cancelStepNumber={this.props.cancelStepNumber}
-          selectedDatasets={this.state.selectedDatasets} />
+      case 2: return <NamingDataset
+        increaseStepNumber={this.props.increaseStepper}
+        decreaseStepNumber={this.props.decreaseStepper}
+        cancelStepNumber={this.props.cancelStepNumber}
+        selectedDatasets={this.state.selectedDatasets}
+        setSelectedDatasetToEmptyArray={this.setSelectedDatasetToEmptyArray}
+      />
 
-        default: return <SelectDataset increaseStepNumber={this.props.increaseStepper} />
-      }
+      default: return <SelectDataset increaseStepNumber={this.props.increaseStepper} />
     }
   }
 
   render () {
     return (
       <div>
+
         <ul className={['step', classes.Step].join(' ')}>
           {this.state.stepNames.map((name, index) => (
             <Stepper
@@ -78,6 +85,7 @@ class CopyDataset extends Component {
         </ul>
 
         {this.componentToBeRender()}
+
       </div>
     )
   }
@@ -85,8 +93,7 @@ class CopyDataset extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    stepNumber: state.copyReducer.stepNumber,
-
+    stepNumber: state.copyReducer.stepNumber
   }
 }
 

@@ -65,25 +65,25 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    stepNumber: state.provisonReducer.stepNumber,
-    datasets: state.provisonReducer.datasets,
-    // isAuthenticated: state.authReducer.token !== null
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     stepNumber: state.provisonReducer.stepNumber,
+//     datasets: state.provisonReducer.datasets,
+//     // isAuthenticated: state.authReducer.token !== null
+//   }
+// }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    increaseStepper: () => dispatch(provisionActionCreators.increaseStepper(1)),
-  }
-}
-
-
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     increaseStepper: () => dispatch(provisionActionCreators.increaseStepper(1)),
+//   }
+// }
 
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
-// export default withRouter(App)
+
+
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(App)
 
 

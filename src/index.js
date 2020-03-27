@@ -15,7 +15,7 @@ import provisonReducer from './store/reducers/provision'
 import createReducer from './store/reducers/create'
 import copyReducer from './store/reducers/copy'
 
-/* for async code */
+/* for async code (in actions)*/
 import thunk from 'redux-thunk';
 
 /* for redux dev-tools */

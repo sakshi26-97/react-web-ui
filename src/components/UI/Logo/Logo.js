@@ -6,7 +6,7 @@ import accentureLogo from '../../../assets/images/accenture.png'
 const logo = props => {
   return (
     // <div className={classes.Logo}>
-    <img className={classes.Logo} src={accentureLogo} alt="Burger Logo"></img>
+    <img className={classes.Logo} src={accentureLogo} alt="Accenture Logo"></img>
     // </div>
   )
 }

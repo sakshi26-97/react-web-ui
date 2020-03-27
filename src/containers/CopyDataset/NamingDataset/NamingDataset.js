@@ -3,9 +3,6 @@ import classes from './NamingDataset.css'
 import Aux from '../../../hoc/Aux/Aux'
 import Button from '../../../components/UI/Button/Button'
 
-import { connect } from 'react-redux';
-// import * as copyActionCreators from '../../../store/actions/index'
-
 class NamingDataset extends Component {
 
   state = {
@@ -30,15 +27,21 @@ class NamingDataset extends Component {
     })
   }
 
+
+  /* componentWillUnmount is called only once when that component dies therefore initializing state.selectedDatasets in CopyDataset.js file to [] */
+  componentWillUnmount () {
+    this.props.setSelectedDatasetToEmptyArray()
+  }
+
+
+  /* checks whether next button should be disabled or not */
   isCopyDisable = () => {
 
-    let unfilledName = this.state.copyDataset.filter((eachDataset) => {
-      if (eachDataset['project'] === '' || eachDataset['selectedEnv'] === '' || eachDataset['air'] === '')
-        return eachDataset;
-    })
+    let unfilledName = this.state.copyDataset.filter((eachDataset) => eachDataset['project'] === '' || eachDataset['selectedEnv'] === '' || eachDataset['air'] === '')
     return unfilledName.length > 0
   }
 
+  /* initializes value in project or selectedEnv or air based on user event */
   inputClick = (projectName, selectedEnv, id, index) => {
     let copy = [...this.state.copyDataset]
 
@@ -121,18 +124,7 @@ class NamingDataset extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    // datasets: state.copyReducer.datasets,
-    // loading: state.copyReducer.loading
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    // getDatasets: () => dispatch(copyActionCreators.getCopyDatasets())
-  }
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NamingDataset)
+
+export default NamingDataset
