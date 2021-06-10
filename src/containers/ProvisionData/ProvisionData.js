@@ -1,4 +1,4 @@
-// import React, { Component } from 'react'
+import React, { Component } from 'react'
 // import classes from './ProvisionData.css'
 // import Stepper from '../../components/UI/Stepper/Stepper'
 // import Datasets from './Datasets/Datasets'
@@ -11,7 +11,13 @@
 // import { connect } from 'react-redux';
 // import * as provisionActionCreators from '../../store/actions/index'
 
-// class ProvisionData extends Component {
+class ProvisionData extends Component {
+  render () {
+    return (<p>ProvisionData</p>)
+  }
+}
+
+export default ProvisionData
 
 
 //   state = {

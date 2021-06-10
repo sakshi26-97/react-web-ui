@@ -1,12 +1,12 @@
 import React from 'react'
 import classes from './Logo.css'
-import accentureLogo from '../../../assets/images/accenture.png'
+import logo from '../../../assets/images/acc.png'
 
 
 const logo = props => {
   return (
     // <div className={classes.Logo}>
-    <img className={classes.Logo} src={accentureLogo} alt="Accenture Logo"></img>
+    <img className={classes.Logo} src={logo} alt="Logo"></img>
     // </div>
   )
 }
